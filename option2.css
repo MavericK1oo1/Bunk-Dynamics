@@ -1,0 +1,270 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap');
+
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: #1f1c2c;
+  color: #f0f0f0;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 550px;
+  margin: 80px auto;
+  background: rgba(26, 28, 44, 0.85);
+  backdrop-filter: blur(10px);
+  padding: 30px 40px;
+  border-radius: 25px;
+  box-shadow: 0 0 25px rgba(0, 191, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+h1 {
+  text-align: center;
+  color: #00BFFF;
+  margin-bottom: 5px;
+  text-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 0.95rem;
+  color: #a0a0b0;
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  color: #d1d1d1;
+  font-weight: 500;
+}
+
+.input-group {
+  margin-bottom: 18px;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #4a4a6a;
+  outline: none;
+  font-size: 1rem;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  background-color: #2a2a3e;
+  color: #f0f0f0;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23a0a0b0' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 1em;
+}
+
+input:focus,
+select:focus {
+  border-color: #00BFFF;
+  box-shadow: 0 0 10px rgba(0, 191, 255, 0.4);
+}
+
+.date-range {
+  display: flex;
+  gap: 20px;
+}
+
+.attendance-display {
+  background-color: rgba(0, 191, 255, 0.1);
+  border: 1px solid rgba(0, 191, 255, 0.3);
+  color: #00BFFF;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-weight: 500;
+  text-align: center;
+}
+
+button {
+  background: #00BFFF;
+  color: white;
+  border: none;
+  width: 100%;
+  padding: 12px;
+  font-size: 1.1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+button:hover {
+  background: #009ACD;
+  box-shadow: 0 0 15px rgba(0, 191, 255, 0.6);
+}
+
+#result {
+  margin-top: 25px;
+  font-size: 1rem;
+  color: #d1d1d1;
+  background: #2a2a3e;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  line-height: 1.6;
+  border: 1px solid #4a4a6a;
+}
+
+.chart-container {
+  margin-top: 25px;
+  padding: 15px;
+  background: #2a2a3e;
+  border-radius: 10px;
+  border: 1px solid #4a4a6a;
+}
+
+.hidden {
+  display: none;
+}
+
+/* === Slider === */
+#targetAttendanceSection hr {
+  border: none;
+  border-top: 1px solid #4a4a6a;
+  margin: 5px 0 20px 0;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  background: #4a4a6a;
+  outline: none;
+  border-radius: 5px;
+  border: none;
+  padding: 0;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  background: #00BFFF;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background 0.3s;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  background: #009ACD;
+}
+
+/* === Holiday Section === */
+#holidaySection {
+  margin-top: 15px;
+}
+
+.holiday-input {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.holiday-input input {
+  flex: 1;
+}
+
+#holidayList {
+  margin-bottom: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.holiday-tag {
+  background-color: rgba(0, 191, 255, 0.15);
+  color: #00BFFF;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  border: 1px solid rgba(0, 191, 255, 0.4);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.holiday-tag button {
+  background: none;
+  border: none;
+  color: #ff5f6d;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* === Back to Home === */
+.back-to-home {
+  text-align: center;
+  margin: 40px auto -40px auto;
+  max-width: 550px;
+}
+
+.back-to-home a {
+  display: inline-block;
+  padding: 10px 25px;
+  border-radius: 50px;
+  background: #2a2a3e;
+  color: #00BFFF;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  border: 1px solid #4a4a6a;
+}
+
+.back-to-home a:hover {
+  background: #00BFFF;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 191, 255, 0.4);
+  border-color: #00BFFF;
+}
+/* === Typing Animation Footer === */
+.typewriter {
+  margin-top: 40px;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+}
+
+.typewriter p {
+  display: inline-block;
+  overflow: hidden;
+  border-right: .15em solid #00BFFF;
+  white-space: nowrap;
+  margin: 0 auto;
+  letter-spacing: .1em;
+  animation: typing 4s steps(40, end), blink-caret .75s step-end infinite;
+  color: #a0a0b0;
+  font-size: 0.95rem;
+}
+
+.typewriter span {
+  color: #ff5f6d;
+  font-weight: 600;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: #00BFFF; }
+}

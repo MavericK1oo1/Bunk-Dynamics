@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: #1f1c2c;
+  color: #f0f0f0;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 550px;
+  margin: 60px auto;
+  background: rgba(26, 28, 44, 0.85);
+  backdrop-filter: blur(10px);
+  padding: 30px 40px;
+  border-radius: 25px;
+  box-shadow: 0 0 25px rgba(0, 191, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+h1 { text-align: center; color: #00BFFF; margin-bottom: 5px; text-shadow: 0 0 10px rgba(0, 191, 255, 0.5); }
+.subtitle { text-align: center; font-size: 0.95rem; color: #a0a0b0; margin-bottom: 25px; }
+hr { border: none; border-top: 1px solid #4a4a6a; margin: 20px 0; }
+.input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.input-group { margin-bottom: 18px; }
+label { display: block; margin-bottom: 8px; color: #d1d1d1; font-weight: 500; }
+
+input {
+  width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #4a4a6a;
+  outline: none; font-size: 1rem; box-sizing: border-box; 
+  font-family: "Poppins", sans-serif; background-color: #2a2a3e; color: #f0f0f0;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input:focus { border-color: #00BFFF; box-shadow: 0 0 10px rgba(0, 191, 255, 0.4); }
+
+button {
+  background: #00BFFF; color: white; border: none; width: 100%;
+  padding: 12px; font-size: 1.1rem; border-radius: 10px; cursor: pointer;
+  transition: 0.3s; margin-top: 10px;
+}
+button:hover { background: #009ACD; box-shadow: 0 0 15px rgba(0, 191, 255, 0.6); }
+
+/* NEW: Styles for the Current Attendance display */
+.attendance-display {
+  background-color: rgba(255, 95, 109, 0.15);
+  border: 1px solid rgba(255, 95, 109, 0.5);
+  color: #ff7885;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* UPDATED: Styles for the final result container */
+#result-container {
+  margin-top: 25px;
+  padding: 25px;
+  border-radius: 15px;
+  text-align: center;
+  border: 1px solid;
+  animation: fadeIn 0.5s ease-out;
+}
+
+#result-container.is-loss {
+  background-color: rgba(255, 95, 109, 0.1);
+  border-color: #ff5f6d;
+}
+#result-container.is-gain {
+  background-color: rgba(40, 167, 69, 0.1);
+  border-color: #28a745;
+}
+
+.result-emoji { font-size: 3rem; line-height: 1; }
+.result-message { font-size: 1.1rem; margin: 10px 0 15px 0; line-height: 1.6; }
+.final-attendance-value { font-size: 2rem; font-weight: 600; }
+.is-loss .final-attendance-value { color: #ff7885; }
+.is-gain .final-attendance-value { color: #32cd32; }
+
+.hidden { display: none; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* === Back to Home Link === */
+.back-to-home {
+  text-align: center;
+  margin: 40px auto -20px auto;
+  max-width: 550px;
+}
+
+.back-to-home a {
+  display: inline-block;
+  padding: 10px 25px;
+  border-radius: 50px; /* Pill shape */
+  background: #2a2a3e; /* Matches input background */
+  color: #00BFFF; /* Main accent color */
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  border: 1px solid #4a4a6a; /* Matches input border */
+}
+
+.back-to-home a:hover {
+  background: #00BFFF; /* Main accent color */
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 191, 255, 0.4);
+  border-color: #00BFFF;
+}
+/* === Typing Animation Footer === */
+.typewriter {
+  margin-top: 40px;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+}
+
+.typewriter p {
+  display: inline-block;
+  overflow: hidden;
+  border-right: .15em solid #00BFFF;
+  white-space: nowrap;
+  margin: 0 auto;
+  letter-spacing: .1em;
+  animation: typing 4s steps(40, end), blink-caret .75s step-end infinite;
+  color: #a0a0b0;
+  font-size: 0.95rem;
+}
+
+.typewriter span {
+  color: #ff5f6d;
+  font-weight: 600;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: #00BFFF; }
+}

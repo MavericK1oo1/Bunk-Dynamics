@@ -1,0 +1,238 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap');
+
+/* === Base styling === */
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: #1f1c2c;
+  color: #f0f0f0;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* === Main Content Container === */
+.container {
+  max-width: 550px;
+  margin: 50px auto;
+  background: rgba(26, 28, 44, 0.85);
+  backdrop-filter: blur(10px);
+  padding: 30px 40px;
+  border-radius: 25px;
+  box-shadow: 0 0 25px rgba(0, 191, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* === Typography === */
+h1 {
+  text-align: center;
+  color: #00BFFF;
+  margin-bottom: 5px;
+  text-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 0.95rem;
+  color: #a0a0b0;
+  margin-bottom: 25px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  color: #d1d1d1;
+  font-weight: 500;
+}
+
+/* === Inputs and Forms === */
+.input-group {
+  margin-bottom: 18px;
+}
+
+input[type="number"],
+input[type="date"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #4a4a6a;
+  outline: none;
+  font-size: 1rem;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  background-color: #2a2a3e;
+  color: #f0f0f0;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input[type="number"]:focus,
+input[type="date"]:focus {
+  border-color: #00BFFF;
+  box-shadow: 0 0 10px rgba(0, 191, 255, 0.4);
+}
+
+.holiday-section {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.holiday-section input {
+  flex: 1;
+}
+
+.holiday-section button {
+  flex-basis: 100px;
+  padding: 11px;
+  font-size: 1rem;
+  margin-top: 0;
+}
+
+/* === Holiday List === */
+ul#holidayList {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 10px;
+}
+
+ul#holidayList li {
+  background: #2a2a3e;
+  color: #d1d1d1;
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  border: 1px solid #4a4a6a;
+}
+
+ul#holidayList button {
+  background: #ff5f6d; /* Contrasting color for remove */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 3px 8px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: background-color 0.3s;
+}
+
+ul#holidayList button:hover {
+    background: #ff2a4e;
+}
+
+/* === Buttons === */
+button {
+  background: #00BFFF;
+  color: white;
+  border: none;
+  width: 100%;
+  padding: 12px;
+  font-size: 1.1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+button:hover {
+  background: #009ACD;
+  box-shadow: 0 0 15px rgba(0, 191, 255, 0.6);
+}
+
+/* === Result Box === */
+#result {
+  margin-top: 25px;
+  font-size: 1rem;
+  color: #d1d1d1;
+  background: #2a2a3e;
+  padding: 15px;
+  border-left: 4px solid #00BFFF;
+  border-radius: 0 8px 8px 0;
+  max-height: 350px;
+  overflow-y: auto;
+  line-height: 1.7;
+}
+
+#result p {
+  margin: 5px 0;
+}
+
+#result strong {
+  color: #00BFFF;
+  font-weight: 600;
+}
+
+#result hr {
+    border: none;
+    border-top: 1px solid #4a4a6a;
+    margin: 15px 0;
+}
+
+/* === Back to Home Link === */
+.back-to-home {
+  text-align: center;
+  margin: 40px auto -20px auto;
+  max-width: 550px;
+}
+
+.back-to-home a {
+  display: inline-block;
+  padding: 10px 25px;
+  border-radius: 50px;
+  background: #2a2a3e;
+  color: #00BFFF;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  border: 1px solid #4a4a6a;
+}
+
+.back-to-home a:hover {
+  background: #00BFFF;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 191, 255, 0.4);
+  border-color: #00BFFF;
+}
+/* === Typing Animation Footer === */
+.typewriter {
+  margin-top: 40px;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+}
+
+.typewriter p {
+  display: inline-block;
+  overflow: hidden;
+  border-right: .15em solid #00BFFF;
+  white-space: nowrap;
+  margin: 0 auto;
+  letter-spacing: .1em;
+  animation: typing 4s steps(40, end), blink-caret .75s step-end infinite;
+  color: #a0a0b0;
+  font-size: 0.95rem;
+}
+
+.typewriter span {
+  color: #ff5f6d;
+  font-weight: 600;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: #00BFFF; }
+}
+
+
+
+
+

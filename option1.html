@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BunkMeter - Day by Day Analysis</title>
+  <link rel="stylesheet" href="option1.css" />
+</head>
+<body>
+  <div class="back-to-home">
+    <a href="index.html">← Back to Homepage</a>
+  </div>
+
+  <div class="container">
+    <h1>📅 Day-by-Day Attendance Analysis</h1>
+    <p class="subtitle">Calculate your attendance progression from tomorrow onwards.</p>
+
+    <div class="input-group">
+      <label for="totalLectures">Total Lectures Till Now:</label>
+      <input type="number" id="totalLectures" placeholder="e.g. 180" />
+    </div>
+
+    <div class="input-group">
+      <label for="attendedLectures">Lectures Attended Till Now:</label>
+      <input type="number" id="attendedLectures" placeholder="e.g. 140" />
+    </div>
+
+    <div class="input-group">
+      <label for="asOfDate">Your 'So Far' Date:</label>
+      <input type="date" id="asOfDate" />
+    </div>
+
+    <div class="input-group">
+      <label for="lecturesPerDay">Lectures per Day:</label>
+      <input type="number" id="lecturesPerDay" placeholder="e.g. 5" />
+    </div>
+
+    <div class="input-group">
+      <label for="workingDays">Working Days per Week:</label>
+      <input type="number" id="workingDays" placeholder="e.g. 5 for Mon-Fri" min="1" max="7" />
+    </div>
+
+    <div class="input-group">
+      <label for="endDate">Project Until (End Date):</label>
+      <input type="date" id="endDate" />
+    </div>
+
+    <div class="input-group">
+      <label for="holidayDate">Add Holidays (if any):</label>
+      <div class="holiday-section">
+        <input type="date" id="holidayDate" />
+        <button type="button" id="addHolidayBtn">Add</button>
+      </div>
+      <ul id="holidayList"></ul>
+    </div>
+
+    <button onclick="calculateAttendance()">Start Analysis 🚀</button>
+
+    <div id="result"></div>
+  </div>
+
+  <script src="option1.js"></script>
+  <div class="typewriter">
+  <p>🧠 Over-engineered by <span>Vivek Verma</span></p>
+</div>
+
+</body>
+</html>
+
+
+
+
+

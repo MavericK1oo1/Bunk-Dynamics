@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bunk Wunk - Today's Impact</title>
+  <link rel="stylesheet" href="option3.css" />
+</head>
+<body class="dark-mode">
+  <div class="back-to-home">
+    <a href="index.html">← Back to Homepage</a>
+  </div>
+
+  <div class="container">
+    <h1>⚡ Real-Time Bunk Impact</h1>
+    <p class="subtitle">Calculate the exact damage before you bunk!</p>
+
+    <div class="input-group">
+      <label>Lectures You Attended (So Far):</label>
+      <input type="number" id="attendedLectures" placeholder="e.g., 60" />
+    </div>
+    <div class="input-group">
+      <label>Total Lectures Held (So Far):</label>
+      <input type="number" id="totalLectures" placeholder="e.g., 80" />
+    </div>
+
+    <div class="input-group">
+      <label for="asOfDate">Date of Above Count:</label>
+      <input type="date" id="asOfDate" />
+    </div>
+    
+    <div id="current-attendance-display" class="attendance-display hidden">
+      Current Attendance: <strong id="current-percent-value">0.00%</strong>
+    </div>
+    <hr>
+    
+    <div class="input-grid">
+      <div class="input-group">
+        <label>Lectures Scheduled Today:</label>
+        <input type="number" id="lecturesToday" placeholder="e.g., 4" />
+      </div>
+      <div class="input-group">
+        <label>Lectures You'll Bunk Today:</label>
+        <input type="number" id="lecturesToBunk" placeholder="e.g., 1" />   
+      </div>
+    </div>
+    
+    <button id="calculateBtn">See the Future 🚀</button>
+    
+    <div id="result-container" class="hidden">
+      <span class="result-emoji"></span>
+      <p class="result-message"></p>
+      <div class="final-attendance-value"></div>
+    </div>
+  </div>
+
+  <script src="option3.js"></script>
+  <div class="typewriter">
+  <p>🎓 Engineered by <span>Vivek Verma </span> (Attendance: 74.99%)</span></p>
+</div>
+
+</body>
+</html>
