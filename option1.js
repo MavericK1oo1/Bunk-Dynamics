@@ -1,116 +1,130 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Set default for 'Date of Count' and minimum for 'End Date'
   const today = new Date();
+  const yyyy = today.getFullYear();
+  const mm = String(today.getMonth() + 1).padStart(2, '0');
+  const dd = String(today.getDate()).padStart(2, '0');
+
+  const todayStr = `${yyyy}-${mm}-${dd}`;
+  document.getElementById('asOfDate').value = todayStr;
+
   const tomorrow = new Date(today);
   tomorrow.setDate(tomorrow.getDate() + 1);
-
-  document.getElementById('asOfDate').valueAsDate = today;
-  document.getElementById('endDate').setAttribute('min', tomorrow.toISOString().split('T')[0]);
+  document.getElementById('endDate').min =
+    `${tomorrow.getFullYear()}-${String(tomorrow.getMonth() + 1).padStart(2, '0')}-${String(tomorrow.getDate()).padStart(2, '0')}`;
 });
 
 let holidays = [];
 
+/* ===== ADD HOLIDAY ===== */
 document.getElementById('addHolidayBtn').addEventListener('click', () => {
-  const dateInput = document.getElementById('holidayDate');
-  const dateValue = dateInput.value;
+  const dateValue = document.getElementById('holidayDate').value;
 
   if (dateValue && !holidays.includes(dateValue)) {
-    holidays.push(dateValue);
+    holidays.push(dateValue); // YYYY-MM-DD only
+    holidays.sort();
     updateHolidayList();
   }
-  dateInput.value = '';
 });
 
+/* ===== REMOVE HOLIDAY ===== */
 function removeHoliday(date) {
   holidays = holidays.filter(d => d !== date);
   updateHolidayList();
 }
 
+/* ===== DISPLAY HOLIDAYS (LOCAL SAFE) ===== */
 function updateHolidayList() {
   const list = document.getElementById('holidayList');
   list.innerHTML = '';
-  holidays.sort((a, b) => new Date(a) - new Date(b));
-  holidays.forEach(date => {
+
+  holidays.forEach(dateStr => {
+    const [y, m, d] = dateStr.split('-');
+    const displayDate = new Date(y, m - 1, d); // LOCAL DATE (SAFE)
+
     const li = document.createElement('li');
-    const displayDate = new Date(date.replace(/-/g, '/')); 
-    li.innerHTML = `${displayDate.toDateString()} 
-      <button onclick="removeHoliday('${date}')">Remove</button>`;
+    li.innerHTML = `
+      ${displayDate.toDateString()}
+      <button onclick="removeHoliday('${dateStr}')">Remove</button>
+    `;
     list.appendChild(li);
   });
 }
 
+/* ===== MAIN CALCULATION ===== */
 function calculateAttendance() {
-  // --- Get all input values ---
-  const totalLecturesInput = parseInt(document.getElementById('totalLectures').value);
-  const attendedLecturesInput = parseInt(document.getElementById('attendedLectures').value);
-  const asOfDateInput = document.getElementById('asOfDate').value;
+  const totalLectures = parseInt(document.getElementById('totalLectures').value);
+  const attendedLectures = parseInt(document.getElementById('attendedLectures').value);
+  const asOfDateStr = document.getElementById('asOfDate').value;
   const lecturesPerDay = parseInt(document.getElementById('lecturesPerDay').value);
   const workingDays = parseInt(document.getElementById('workingDays').value);
-  const endDateInput = document.getElementById('endDate').value;
+  const endDateStr = document.getElementById('endDate').value;
   const resultDiv = document.getElementById('result');
 
-  // --- Validation ---
-  if (isNaN(totalLecturesInput) || isNaN(attendedLecturesInput) || isNaN(lecturesPerDay) || isNaN(workingDays) || !endDateInput || !asOfDateInput) {
-    resultDiv.innerHTML = "<p style='color:red;'>⚠️ Please fill in all fields correctly!</p>";
+  if (
+    isNaN(totalLectures) ||
+    isNaN(attendedLectures) ||
+    isNaN(lecturesPerDay) ||
+    isNaN(workingDays) ||
+    !asOfDateStr ||
+    !endDateStr
+  ) {
+    resultDiv.innerHTML = "<p style='color:red;'>⚠️ Please fill all fields correctly</p>";
     return;
   }
-  
-  const asOfDate = new Date(asOfDateInput.replace(/-/g, '/'));
-  const endDate = new Date(endDateInput.replace(/-/g, '/'));
-  asOfDate.setHours(0, 0, 0, 0);
-  endDate.setHours(0, 0, 0, 0);
+
+  const asOfDate = new Date(...asOfDateStr.split('-').map((v, i) => i === 1 ? v - 1 : v));
+  const endDate = new Date(...endDateStr.split('-').map((v, i) => i === 1 ? v - 1 : v));
 
   if (endDate <= asOfDate) {
-    resultDiv.innerHTML = "<p style='color:red;'>⚠️ The 'End Date' must be after the 'Date of Count'.</p>";
+    resultDiv.innerHTML = "<p style='color:red;'>⚠️ End date must be after count date</p>";
     return;
   }
 
-  // --- Initial Attendance Calculation ---
-  const initialAttendancePercent = totalLecturesInput > 0 ? ((attendedLecturesInput / totalLecturesInput) * 100).toFixed(2) : "N/A";
-
-  // --- Projection Logic ---
-  // CHANGED: The projection now starts from the day AFTER the 'asOfDate'
-  let analysisDate = new Date(asOfDate);
-  analysisDate.setDate(analysisDate.getDate() + 1); 
-
-  let projectedTotal = totalLecturesInput;
-  let projectedAttended = attendedLecturesInput;
+  let projectedTotal = totalLectures;
+  let projectedAttended = attendedLectures;
   let totalFutureWorkingDays = 0;
   let output = "";
 
+  let analysisDate = new Date(asOfDate);
+  analysisDate.setDate(analysisDate.getDate() + 1);
+
   while (analysisDate <= endDate) {
     const dayOfWeek = analysisDate.getDay();
-    const formattedDate = analysisDate.toISOString().split('T')[0];
 
-    // Check if it's a working day and not a holiday
+    const yyyy = analysisDate.getFullYear();
+    const mm = String(analysisDate.getMonth() + 1).padStart(2, '0');
+    const dd = String(analysisDate.getDate()).padStart(2, '0');
+    const dateKey = `${yyyy}-${mm}-${dd}`;
+
     if (dayOfWeek >= 1 && dayOfWeek <= workingDays) {
-      if (holidays.includes(formattedDate)) {
+      if (holidays.includes(dateKey)) {
         output += `<p><strong>${analysisDate.toDateString()}:</strong> Holiday 🎉</p>`;
       } else {
-        // Assume perfect attendance for all future non-holiday working days
         projectedTotal += lecturesPerDay;
         projectedAttended += lecturesPerDay;
         totalFutureWorkingDays++;
-        const attendancePercent = ((projectedAttended / projectedTotal) * 100).toFixed(2);
-        output += `<p><strong>${analysisDate.toDateString()}:</strong> Attendance will be ${attendancePercent}%</p>`;
+        const percent = ((projectedAttended / projectedTotal) * 100).toFixed(2);
+        output += `<p><strong>${analysisDate.toDateString()}:</strong> Attendance will be ${percent}%</p>`;
       }
     } else {
       output += `<p><strong>${analysisDate.toDateString()}:</strong> Weekend ⛱️</p>`;
     }
+
     analysisDate.setDate(analysisDate.getDate() + 1);
   }
 
-  const finalAttendance = projectedTotal > 0 ? ((projectedAttended / projectedTotal) * 100).toFixed(2) : initialAttendancePercent;
-  
-  // CHANGED: The output format is updated for the new logic
+  const finalAttendance = ((projectedAttended / projectedTotal) * 100).toFixed(2);
+
   resultDiv.innerHTML = `
-    <p><strong>Attendance on ${asOfDate.toDateString()}:</strong> ${initialAttendancePercent}%</p>
+    <p><strong>Attendance on ${asOfDate.toDateString()}:</strong> ${(attendedLectures / totalLectures * 100).toFixed(2)}%</p>
     <p><strong>Projected Attendance on ${endDate.toDateString()}:</strong> ${finalAttendance}%</p>
     <p><strong>Total Future Working Days in Period:</strong> ${totalFutureWorkingDays}</p>
     <hr>
     ${output}
   `;
 }
+
+
 
 
 
